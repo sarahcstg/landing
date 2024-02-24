@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aventura Sphere</title>
+    <style>
+        body {
+            font-family: 'Futura', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            color: #fff;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px;
+            background: url('images/backgroundd.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        #slogan {
+            font-size: 1.5em;
+            font-style: italic;
+        }
+
+        #search-bar {
+            text-align: center;
+            margin: 30px auto;
+            background: #333;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+
+        input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #333;
+            border-radius: 5px;
+            font-size: large;
+        }
+
+        label, select {
+            margin-top: 10px;
+            display: block;
+            font-size: medium;
+        }
+
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #000;
+            border-radius: 5px;
+            font-size: medium;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        #search-bar + div {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #000;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="submit"] {
+            width: 5%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]::after {
+            content: "\1F50D";
+            font-size: 20px;
+            margin-left: 5px;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .travel-offer-container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .travel-offer {
+            flex-basis: calc(33.333% - 10px);
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .travel-offer img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .travel-offer-description {
+            margin-top: 10px;
+            font-size: medium;
+            color: #000;
+        }
+
+        .two-blocks-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .slideshow-container {
+            max-width: 800px;
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .booking-section {
+            max-width: 300px;
+            box-sizing: border-box;
+            padding: 20px;
+            background: #3b9f84;
+            border-radius: 8px;
+        }
+
+        .booking-section label {
+            display: block;
+            margin-top: 10px;
+            font-size: medium;
+            color: #000;
+        }
+
+        .booking-section input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-top: 5px;
+            border: 1px solid #FFF;
+            border-radius: 5px;
+        }
+
+        .booking-section button {
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .mySlides {
+            display: none;
+            transition: opacity 10s;
+        }
+
+        .slideshow-img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -30px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            cursor: pointer;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .fade {
+            animation: fade 20s infinite;
+        }
+
+        @keyframes fade {
+            from { opacity: .4 }
+            to { opacity: 1 }
+        }
+
+        #testimonials {
+            text-align: center;
+            padding: 50px;
+            color: #000;
+            font-style: italic;
+            font-size: 15px;
+        }
+
+        #contact {
+            text-align: center;
+            padding: 50px;
+            background: #333;
+            color: #FFF;
+            font-style: bold;
+        }
+
+        #logos {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        #logos img {
+            width: 40px;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #FFF;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Aventura Sphere</h1>
+    <p id="slogan">Explore the world with endless adventures!</p>
+</header>
+
+<div id="search-bar">
+    <form>
+        <input type="text" placeholder="Search for adventures...">
+        <label for="departure-date">Departure Date:</label>
+        <input type="date" id="departure-date" name="departure-date">
+
+        <label for="price-range">Price Range:</label>
+        <select id="price-range" name="price-range">
+            <option value="any">Any</option>
+            <option value="less-than-100">Less than 100€</option>
+            <option value="100-to-200">100€ - 200€</option>
+            <option value="200-to-500">200€ - 500€</option>
+            <option value="more-than-500">More than 500€</option>
+        </select>
+
+        <label for="adventure-type">Adventure Type:</label>
+        <select id="adventure-type" name="adventure-type">
+            <option value="beach">Beach Destinations</option>
+            <option value="culture">Cultural Exploration</option>
+            <option value="adventure">Adventurous Activities</option>
+            <option value="nature">Nature Escapes</option>
+            <option value="historic">Historic Sites</option>
+        </select>
+
+        <label for="package-type">Package Type:</label>
+        <select id="package-type" name="package-type">
+            <option value="all-inclusive">All-Inclusive</option>
+            <option value="customizable">Customizable</option>
+            <option value="group">Group Tours</option>
+            <option value="solo">Solo Adventures</option>
+        </select>
+
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<div class="main-container">
+    <div class="travel-offer-container">
+        <div class="travel-offer">
+            <img src="images/beach vibes.png" alt="Beach Offer">
+            <div class="travel-offer-description">
+                <h3>Beach Paradise</h3>
+                <p>Escape to pristine beaches and turquoise waters. Relax and rejuvenate in the lap of nature.</p>
+            </div>
+        </div>
+
+        <div class="travel-offer">
+            <img src="images/rome.png" alt="Culture Offer">
+            <div class="travel-offer-description">
+                <h3>Cultural Exploration</h3>
+                <p>Immerse yourself in rich cultural experiences, explore historical landmarks, and savor local traditions.</p>
+            </div>
+        </div>
+
+        <div class="travel-offer">
+            <img src="images/planet vibes.png" alt="Adventure Offer">
+            <div class="travel-offer-description">
+                <h3>Thrilling Adventures</h3>
+                <p>Embark on an otherworldly journey to the moon, where lunar landscapes and celestial wonders await, creating a planet adventure like no other.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="two-blocks-container">
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img class="slideshow-img" src="images/randonnée.jpg" alt="Randonnée">
+            </div>
+            <div class="mySlides fade">
+                <img class="slideshow-img" src="images/canoe.jpg" alt="Canoe">
+            </div>
+            <div class="mySlides fade">
+                <img class="slideshow-img" src="images/snow.png" alt="Snow">
+            </div>
+            <div class="mySlides fade">
+                <img class="slideshow-img" src="images/city vibes.png" alt="City">
+            </div>
+            <div class="mySlides fade">
+                <img class="slideshow-img" src="images/acrobranche.jpg.webp" alt="Acrobranche">
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+
+        <div class="booking-section">
+            <label for="booking-date">Date:</label>
+            <input type="date" id="booking-date" name="booking-date">
+
+            <label for="booking-time">Time:</label>
+            <input type="time" id="booking-time" name="booking-time">
+
+            <label for="number-of-guests">Number of Guests:</label>
+            <input type="number" id="number-of-guests" name="number-of-guests" min="1">
+
+            <button type="button">Book Now</button>
+        </div>
+    </div>
+</div>
+
+<div id="testimonials">
+    <h2>What Our Customers Say</h2>
+    <p>"Planet Vibes Adventure Tour exceeded all expectations! A cosmic dream come true. Highly recommended for an unforgettable journey beyond Earth."</p>
+    <p>"A celestial journey that left me speechless. Unparalleled experiences and cosmic wonders at every turn!"</p>
+</div>
+
+<div id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: adventurasphere@info.com</p>
+    <p>Office: Boulevard Haussmann, 75008 Paris, FRANCE </p>
+</div>
+
+<div id="logos">
+    <img src="images/Facebook_Logo_(2019).png" alt="Facebook">
+    <img src="images/Youtube_logo.png" alt="Youtube">
+    <img src="images/logo-icone-tiktok-simbolo.png" alt="TikTok">
+    <img src="images/Instagram_icon.png" alt="Instagram">
+</div>
+
+<footer>
+    &copy; 2024 Aventura Sphere. All Rights Reserved.
+</footer>
+
+<script>
+    var slideIndex = 0;
+    showSlides();
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        slideIndex++;
+
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 6000);
+    }
+</script>
+
+</body>
+</html>
